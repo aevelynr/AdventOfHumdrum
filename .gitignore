@@ -130,4 +130,4 @@ dmypy.json
 
 .idea/
 venv/
-data/*
+data/day_*.txt
