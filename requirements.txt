@@ -1,1 +1,2 @@
 requests
+browser-cookie3
