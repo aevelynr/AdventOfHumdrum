@@ -40,7 +40,6 @@ if __name__ == "__main__":
 
         if response.ok:
             data_path = os.path.join(os.path.curdir, 'data', f'day_{problem}.txt')
-            print(response.text)
             with open(data_path, 'wb+') as data_file:
                 data_file.write(response.content)
 
