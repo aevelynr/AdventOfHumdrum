@@ -18,7 +18,8 @@ DOMAIN_NAME = 'adventofcode'
 def get_cookies():
     if 'microsoft-standard' in platform.uname().release:
         WSL_ROOT_DIR = os.path.join('/mnt', 'c',)
-        WINDOWS_CHROME_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Local', 'Google', 'Chrome', 'User Data', 'Default', 'Cookies')
+        #C:\Users\aeroe\AppData\Local\Google\Chrome\User Data\Default\Network
+        WINDOWS_CHROME_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Local', 'Google', 'Chrome', 'User Data', 'Default', 'Network', 'Cookies')
         WINDOWS_FIREFOX_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Roaming', 'Mozilla', 'Firefox', 'Profiles', '*', 'cookies.sqlite')
 
         for file, cookie_jar in [
@@ -29,7 +30,7 @@ def get_cookies():
                 cookie = cookie_jar(domain_name=DOMAIN_NAME, cookie_file=cookie_file)
                 if cookie:
                     return cookie
-        raise Exception('Could not find the cookie for WSL')
+        #raise Exception('Could not find the cookie for WSL')
 
     for browser_cookies in [chrome, firefox, safari]:
         cookie = browser_cookies(domain_name='adventofcode')
@@ -37,4 +38,7 @@ def get_cookies():
             return cookie
 
 
-COOKIES = get_cookies()
+try:
+    COOKIES = get_cookies()
+except:
+    COOKIES = {}

@@ -2,10 +2,13 @@ import os
 import argparse
 import requests
 from utils.cookies import COOKIES
+import importlib
+import bs4
 
 
 ADVENT_OF_CODE_YEAR = 2021
 DATA_URL = 'https://adventofcode.com/{}/day/{}/input'
+SOUP_URL = 'https://adventofcode.com/{}/day/{}'
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -26,8 +29,8 @@ if __name__ == "__main__":
         :param problem:
         :return:
         '''
-        pass
-
+        problem = importlib.import_module(f'problems.day_{problem}')
+        problem.main()
 
     def download(problem):
         '''
@@ -51,8 +54,18 @@ if __name__ == "__main__":
         :param problem:
         :return:
         '''
-        pass
 
+        response = requests.get(SOUP_URL.format(ADVENT_OF_CODE_YEAR, problem), cookies=COOKIES)
+        #print(response.text)
+        if response.ok:
+            soup = bs4.BeautifulSoup(response.text, "html.parser")
+            boiled_soup = soup.find('article', attrs={'class': 'day-desc'})
+            text_path = os.path.join(os.path.curdir, 'problems', f'day_{problem}.py')
+            with open(text_path, 'w+') as text_file:
+                for lines in boiled_soup.get_text().splitlines():
+                    text_comment = '#' + lines + '\n'
+                    text_file.write(text_comment)
+                text_file.write(f"def main():\n    print('problem{problem}')")
     if args.run:
         run(args.problem)
     elif args.download:
