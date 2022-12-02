@@ -6,7 +6,7 @@ import importlib
 import bs4
 
 
-ADVENT_OF_CODE_YEAR = 2021
+ADVENT_OF_CODE_YEAR = 2022
 DATA_URL = 'https://adventofcode.com/{}/day/{}/input'
 SOUP_URL = 'https://adventofcode.com/{}/day/{}'
 
