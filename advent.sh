@@ -58,7 +58,7 @@ then
   exit
 fi
 
-if [[ "$problem_number" =~ 1?[0-9]|2[0-5] ]]
+if [[ "$problem_number" =~ 1?[1-9]|2[0-5] ]]
 then
   if [[ "$*" =~ \-.{,2}s ]]
   then
