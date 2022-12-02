@@ -10,16 +10,7 @@ if __name__ == '__main__':
     PROBLEM_URL = 'https://adventofcode.com/{}/day/{}'
     DATA_LOAD = '''\ndata = open('data.txt', 'r')\n'''
     advent_year, problem_number = sys.argv[1:]
-
-    if not problem_number.isdigit():
-        exit()
-
     problem_path = os.path.join(os.path.dirname(__file__), 'problems', str(advent_year), str(problem_number))
-    os.makedirs(problem_path, exist_ok=True)
-    problem_main_path = os.path.join(problem_path, 'main.py')
-    if os.path.isfile(problem_path):
-        pass
-
     response = requests.get(PROBLEM_URL.format(advent_year, problem_number), cookies=COOKIES)
     if response.ok:
         soup = BeautifulSoup(response.text, 'lxml')
