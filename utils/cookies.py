@@ -18,7 +18,7 @@ DOMAIN_NAME = 'adventofcode'
 def get_cookies():
     if 'microsoft-standard' in platform.uname().release:
         WSL_ROOT_DIR = os.path.join('/mnt', 'c',)
-        WINDOWS_CHROME_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Local', 'Google', 'Chrome', 'User Data', 'Default', 'Cookies')
+        WINDOWS_CHROME_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Local', 'Google', 'Chrome', 'User Data', 'Default', 'Network', 'Cookies')
         WINDOWS_FIREFOX_COOKIES = os.path.join(WSL_ROOT_DIR, 'Users', '*', 'AppData', 'Roaming', 'Mozilla', 'Firefox', 'Profiles', '*', 'cookies.sqlite')
 
         for file, cookie_jar in [
@@ -38,3 +38,6 @@ def get_cookies():
 
 
 COOKIES = get_cookies()
+
+if __name__ == '__main__':
+    print(COOKIES)
